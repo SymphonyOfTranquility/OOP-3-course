@@ -19,63 +19,106 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.FastMath;
 import com.jme3.util.TangentBinormalGenerator;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.renderer.Camera;
+import com.jme3.bullet.BulletAppState;
 
 public class MainApp extends SimpleApplication {
 
+    //jupiter object
     private Geometry jupiterGeo;
+    //physics of moving
     private Physics physics;
+    //voyager object
     private Geometry voyagerGeo;
-    
+    //physics application state
+    private BulletAppState bulletAppState;
     
     private void jupiterCreation()
     {
-        Sphere sphereMesh = new Sphere(32, 32, 2f);
-        jupiterGeo = new Geometry("Jupiter", sphereMesh);
+        //jupiter mesh
+        Sphere sphereMesh = new Sphere(64, 64, physics.getJupiterRadius());
         sphereMesh.setTextureMode(Sphere.TextureMode.Projected);
         
+        //texture and material of jupiter
         Texture sphereTexture = assetManager.loadTexture("img/Jupiter.jpg");
         sphereTexture.setWrap(Texture.WrapMode.Repeat);
         Material sphereMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         sphereMat.setTexture("ColorMap", sphereTexture);
         
+        //jupiter geometry
+        jupiterGeo = new Geometry("Jupiter", sphereMesh);
         jupiterGeo.setMaterial(sphereMat);
-        Quaternion roll180 = new Quaternion();
-        roll180.fromAngleAxis( FastMath.PI , new Vector3f(-1,1,1) );
-        /* The rotation is applied: The object rolls by 180 degrees. */
-        jupiterGeo.setLocalRotation( roll180 );
         
+        //jupiter rotate
+        Quaternion roll = new Quaternion();
+        roll.fromAngleAxis( FastMath.PI , new Vector3f(-1,0.5f,1) );
+        jupiterGeo.setLocalRotation(roll);
+        
+        //jupiter position
+        jupiterGeo.setLocalTranslation(physics.getJupiterPosition());
+         
+        //jupiter physics
+        jupiterGeo.addControl(new RigidBodyControl(20000000.0f));
+        bulletAppState.getPhysicsSpace().add(jupiterGeo.getControl(RigidBodyControl.class));
+        
+        //attach to main scene
+        rootNode.attachChild(jupiterGeo);
     }
     
     
     private void voyagerCreation()
     {
+        //voyager mesh
         Box voyagerMesh = new Box(0.5f, 0.3f, 0.3f);
-        voyagerGeo = new Geometry("Voyager", voyagerMesh);
+        //voyager material
         Material voyagerMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");        
         voyagerMat.setColor("Color", ColorRGBA.Blue);
-        voyagerGeo.setMaterial(voyagerMat);
-        voyagerGeo.setLocalTranslation(-5f, 5f, 8f);        
+        //voyager geometry
+        voyagerGeo = new Geometry("Voyager", voyagerMesh);
+        voyagerGeo.setMaterial(voyagerMat);   
+        //voyager physics
+        RigidBodyControl voyagerPhy = new RigidBodyControl(2000.0f);
+        voyagerGeo.addControl(voyagerPhy);             
+        bulletAppState.getPhysicsSpace().add(voyagerPhy);
+        voyagerPhy.setLinearVelocity(new Vector3f(10.0f, 0, 0));
+        
+        
+        //voyager position
+        voyagerGeo.setLocalTranslation(physics.getVoyagerPosition());
+        
+        //attach to main scene
+        rootNode.attachChild(voyagerGeo);
     }
 
     
     
     @Override
     public void simpleInitApp() {
+        // configure cam to look at scene
         flyCam.setMoveSpeed(15f);
+        cam.setLocation(new Vector3f(20.0f, 0.0f, 40.0f));
         
+        //set up physics game
+        bulletAppState = new BulletAppState();
+        stateManager.attach(bulletAppState);        
+        bulletAppState.getPhysicsSpace().setGravity(new Vector3f(0,0,0));
+        
+        //set up physics/create objects
         physics = new Physics();
         jupiterCreation();
         voyagerCreation();
         
-        rootNode.attachChild(jupiterGeo);
-        rootNode.attachChild(voyagerGeo);
     }    
     
     
     @Override 
-    public void simpleUpdate(float tpf)
+    public void update()
     {
-        jupiterGeo.rotate(0.0f, 0.0f, 0.3f*tpf);
+        //jupiter rotation
+        jupiterGeo.rotate(0.0f, 0.0f, 0.01f);
+        //jupiter change gravity TODO
+        //voyagerGeo.getControl(RigidBodyControl.class).setGravity(physics.getDirectVector());
         
+        super.update();
     }
 }

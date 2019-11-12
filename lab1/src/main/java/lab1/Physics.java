@@ -3,38 +3,45 @@
  */
 package lab1;
 
-import com.jme3.math.Vector3f;
+import com.jme3.math.*;
 import java.io.*;
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Physics{
     
-    private Vector3f jupiterPos;
-    private Vector3f voyagerPos;
+    private Vector3f jupiterPosition;
+    private Vector3f voyagerPosition;
     private Vector3f directVector;
-    private final static float jupiterWeight = 1.898e27f;  
     private float voyagerWeight;
     
+    private final static float jupiterRadius = 2f;
+    
+    private float getPolarRadius(float x, float y)
+    {
+        return (float) Math.sqrt((double) (x*x + y*y));
+    }
     
     private void inputVals()
     {
-        this.jupiterPos = new Vector3f();
-        this.voyagerPos = new Vector3f();
+        this.jupiterPosition = new Vector3f();
+        this.voyagerPosition = new Vector3f();
         this.directVector = new Vector3f();
         File file = new File("src/main/java/lab1/input.txt");
         
         try{
             Scanner in = new Scanner(file);
-            this.jupiterPos.x = Float.valueOf(in.next()).floatValue();
-            this.jupiterPos.y = Float.valueOf(in.next()).floatValue(); 
-            this.jupiterPos.z = Float.valueOf(in.next()).floatValue();
-            this.voyagerPos.x = Float.valueOf(in.next()).floatValue();
-            this.voyagerPos.y = Float.valueOf(in.next()).floatValue(); 
-            this.voyagerPos.z = Float.valueOf(in.next()).floatValue();
+            this.jupiterPosition.x = Float.valueOf(in.next()).floatValue();
+            this.jupiterPosition.y = Float.valueOf(in.next()).floatValue(); 
+            this.jupiterPosition.z = Float.valueOf(in.next()).floatValue();
+            this.voyagerPosition.x = Float.valueOf(in.next()).floatValue();
+            this.voyagerPosition.y = Float.valueOf(in.next()).floatValue(); 
+            this.voyagerPosition.z = Float.valueOf(in.next()).floatValue();
             this.directVector.x = Float.valueOf(in.next()).floatValue(); 
             this.directVector.y = Float.valueOf(in.next()).floatValue(); 
-            this.directVector.z = Float.valueOf(in.next()).floatValue(); 
-            this.voyagerWeight = Float.valueOf(in.next()).floatValue(); 
+            this.directVector.z = Float.valueOf(in.next()).floatValue();
+            
+            
         }
         catch (FileNotFoundException ex)  
         {
@@ -44,5 +51,30 @@ public class Physics{
     
     public Physics(){
         inputVals();
+    }
+    
+    public float getJupiterRadius()
+    {
+        return jupiterRadius;
+    }
+    
+    public Vector3f getJupiterPosition()
+    {
+        return jupiterPosition;
+    }
+    
+    public Vector3f getVoyagerPosition()
+    {
+        return voyagerPosition;
+    }    
+    
+    public Vector3f getDirectVector()
+    {
+        return directVector;
+    }
+    
+    public Vector3f getGravity()
+    {
+        return jupiterPosition;
     }
 }
