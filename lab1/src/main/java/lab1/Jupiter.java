@@ -32,7 +32,7 @@ public class Jupiter extends SpaceObject{
     {
         objectName = "Jupiter";
         objectRadius = 4.4f;
-        objectMesh = new Sphere(128, 128, objectRadius);
+        objectMesh = new Sphere(64, 64, objectRadius);
     }
     
     public float getWeight()
@@ -45,9 +45,15 @@ public class Jupiter extends SpaceObject{
     {
         super.setStartupParametrs(rootNode, bulletAppState, assetManager);
         //object rotate
+        bulletAppState.getPhysicsSpace().remove(objectPhysics);
+        objectGeo.removeControl(objectPhysics);  
+        
         Quaternion roll = new Quaternion();
-        roll.fromAngleAxis( FastMath.PI , new Vector3f(-1,0.5f,1) );
+        roll.fromAngleAxis( FastMath.PI , new Vector3f(-1f,1f,1f) );
         objectGeo.setLocalRotation(roll);
+        
+        objectGeo.addControl(objectPhysics);
+        bulletAppState.getPhysicsSpace().add(objectPhysics);
     }
     
 }

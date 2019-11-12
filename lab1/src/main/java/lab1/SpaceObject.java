@@ -85,8 +85,10 @@ public abstract class SpaceObject{
         objectPhysics = new RigidBodyControl(physicsMass);
         objectGeo.addControl(objectPhysics);
         
+        
         bulletAppState.getPhysicsSpace().add(objectPhysics);
             
+        
         
         //attach to main scene
         rootNode.attachChild(objectGeo);    

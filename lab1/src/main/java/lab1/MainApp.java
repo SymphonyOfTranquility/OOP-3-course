@@ -32,7 +32,7 @@ public class MainApp extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         // configure cam to look at scene
-        flyCam.setMoveSpeed(15f);
+        flyCam.setMoveSpeed(30f);
         cam.setLocation(new Vector3f(0.0f, 0.0f, 80.0f));
         
         //set up physics game
