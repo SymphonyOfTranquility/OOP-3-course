@@ -7,13 +7,7 @@ import java.lang.Math;
 
 public class Physics{
     
-    private Vector3f jupiterPosition;
-    private Vector3f voyagerPosition;
-    private Vector3f directVector;
     
-    private final static float G = 0.05f;
-    private final static float jupiterRadius = 4.4f;
-    private final static float jupiterWeight = 30000f;
     
     public void inputVals(String path)
     {
@@ -36,6 +30,7 @@ public class Physics{
         }
         catch (FileNotFoundException ex)  
         {
+            System.out.println("File doesn't exists");
         }
     }
     
@@ -45,30 +40,10 @@ public class Physics{
         this.directVector = new Vector3f(0,0,0);
     }
     
-    public float getJupiterRadius()
-    {
-        return jupiterRadius;
-    }
-    
-    public Vector3f getJupiterPosition()
-    {
-        return jupiterPosition;
-    }
-    
-    public Vector3f getVoyagerPosition()
-    {
-        return voyagerPosition;
-    }    
-    
-    public Vector3f getDirectVector()
-    {
-        return directVector;
-    }
-    
-    public Vector3f getGravity(Vector3f newVoyagerPosition)
+    public Vector3f getGravity(Vector3f voyagerPosition)
     {
         voyagerPosition = newVoyagerPosition;
-        Vector3f delta = new Vector3f(0, 0, 0);
+        Vector3f delta = new Vector3f();
         delta.x = jupiterPosition.x - voyagerPosition.x;
         delta.y = jupiterPosition.y - voyagerPosition.y;
         delta.z = jupiterPosition.z - voyagerPosition.z;

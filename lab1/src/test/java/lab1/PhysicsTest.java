@@ -13,13 +13,13 @@ public class PhysicsTest {
         Physics physics = new Physics();
         float jupiterRadius = physics.getJupiterRadius();
         Vector3f startPosOfVoyager = new Vector3f(jupiterRadius*2f, jupiterRadius*2f, jupiterRadius*2f);
-        assertEquals("app should have same voyagerPosition", physics.getVoyagerPosition(), startPosOfVoyager);
+        assertEquals("class should have same voyagerPosition", physics.getVoyagerPosition(), startPosOfVoyager);
         
         Vector3f startPosOfJupiter = new Vector3f(0, 0, 0);
-        assertEquals("app should have same voyagerPosition", physics.getJupiterPosition(), startPosOfJupiter);
+        assertEquals("class should have same jupiterPosition", physics.getJupiterPosition(), startPosOfJupiter);
         
         Vector3f startDirectVector = new Vector3f(0, 0, 0);
-        assertEquals("app should have same voyagerPosition", physics.getDirectVector(), startDirectVector);
+        assertEquals("class should have same voyagerPosition", physics.getDirectVector(), startDirectVector);
     }
     
     @Test public void testAppOnInputParametrs() {
@@ -42,11 +42,9 @@ public class PhysicsTest {
             directVector.y = (float) in.nextFloat();
             directVector.z = (float) in.nextFloat();
             
-            assertEquals("app should have same voyagerPosition", physics.getJupiterPosition(), jupiterPosition);
-            
-            assertEquals("app should have same voyagerPosition", physics.getVoyagerPosition(), voyagerPosition);        
-        
-            assertEquals("app should have same voyagerPosition", physics.getDirectVector(), directVector);
+            assertEquals("class should have same voyagerPosition", physics.getJupiterPosition(), jupiterPosition);            
+            assertEquals("class should have same voyagerPosition", physics.getVoyagerPosition(), voyagerPosition);
+            assertEquals("class should have same voyagerPosition", physics.getDirectVector(), directVector);
             in.close();
         }
         catch (FileNotFoundException ex)  

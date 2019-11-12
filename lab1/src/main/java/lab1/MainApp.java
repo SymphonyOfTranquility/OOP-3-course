@@ -22,11 +22,11 @@ import com.jme3.bullet.BulletAppState;
 public class MainApp extends SimpleApplication {
 
     //jupiter object
-    private Geometry jupiterGeo;
+    private Jupiter jupiter;
     //physics of moving
     private Physics physics;
     //voyager object
-    private Geometry voyagerGeo;
+    private Voyager voyager;
     //physics application state
     private BulletAppState bulletAppState;
     
@@ -67,7 +67,7 @@ public class MainApp extends SimpleApplication {
     private void voyagerCreation()
     {
         //voyager mesh
-        Box voyagerMesh = new Box(0.9f, 0.5f, 0.3f);
+        Box voyagerMesh = new Box(0.9f, 0.5f, 0.3f);    //size
         //voyager material
         Texture voyagerTexture = assetManager.loadTexture("img/Voyager.png");
         voyagerTexture.setWrap(Texture.WrapMode.Repeat);
@@ -79,7 +79,7 @@ public class MainApp extends SimpleApplication {
         //voyager position
         voyagerGeo.setLocalTranslation(physics.getVoyagerPosition());
         //voyager physics
-        RigidBodyControl voyagerPhy = new RigidBodyControl(2000.0f);
+        RigidBodyControl voyagerPhy = new RigidBodyControl(1.0f);
         voyagerGeo.addControl(voyagerPhy);             
         bulletAppState.getPhysicsSpace().add(voyagerPhy);
         voyagerPhy.setLinearVelocity(physics.getDirectVector());        
