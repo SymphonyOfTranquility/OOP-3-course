@@ -1,9 +1,27 @@
 package lab1;
 
-import com.jme3.math.*;
+import com.jme3.asset.AssetManager;
+import com.jme3.app.SimpleApplication;
+import com.jme3.light.DirectionalLight;
+import com.jme3.material.Material;
+import com.jme3.material.RenderState.BlendMode;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Sphere;
+import com.jme3.texture.Texture;
+import com.jme3.asset.TextureKey;
+import com.jme3.math.Quaternion;
+import com.jme3.math.FastMath;
+import com.jme3.util.TangentBinormalGenerator;
+import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.renderer.Camera;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.scene.Node;
 import java.io.*;
 import java.util.Scanner;
-import java.lang.Math;
 
 public abstract class SpaceObject{
     
@@ -11,10 +29,68 @@ public abstract class SpaceObject{
     protected Geometry objectGeo;
     protected Material objectMaterial;
     protected RigidBodyControl objectPhysics;
+    protected String objectName;
+    protected float objectRadius;
+        
+    public Vector3f inputPosition(String path)
+    {
+        try{
+            File file = new File(path);
+            Scanner in = new Scanner(file);
+            Vector3f position = new Vector3f();
+            position.x = (float) in.nextFloat();
+            position.y = (float) in.nextFloat();
+            position.z = (float) in.nextFloat();
+            return position;
+        }
+        catch (Exception ex){
+            return new Vector3f(0,0,0);
+        }
+    }
     
-    protected final float objectRadius;
+    public float inputPhysicsMass(String path)
+    {
+        try{
+            File file = new File(path);
+            Scanner in = new Scanner(file);
+            float mass = 0;
+            for (int i = 0;i < 4;++i)
+                mass = (float) in.nextFloat();
+            return mass;
+        }
+        catch (Exception ex){
+            return 0;
+        }
+    }
     
-    public abstract void setStartupParametrs(Node rootNode, BulletAppState bulletAppState, AssetManager assetManager){}
+    public void setStartupParametrs(Node rootNode, BulletAppState bulletAppState, AssetManager assetManager)
+    {
+        objectMesh.setTextureMode(Sphere.TextureMode.Projected);        
+        //texture and material of object
+        Texture jupiterTexture = assetManager.loadTexture("img/"+objectName+".jpg");
+        jupiterTexture.setWrap(Texture.WrapMode.Repeat);
+        objectMaterial = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        objectMaterial.setTexture("ColorMap", jupiterTexture);
+                
+        //object geometry
+        objectGeo = new Geometry(objectName, objectMesh);
+        objectGeo.setMaterial(objectMaterial);
+                
+        //object position
+        String path = "src/main/resources/"+objectName+".txt";
+        objectGeo.setLocalTranslation(inputPosition(path));
+        
+        float physicsMass = inputPhysicsMass(path);
+        //object physics
+        objectPhysics = new RigidBodyControl(physicsMass);
+        objectGeo.addControl(objectPhysics);
+        
+        bulletAppState.getPhysicsSpace().add(objectPhysics);
+            
+        
+        //attach to main scene
+        rootNode.attachChild(objectGeo);    
+    }
     
     
     public void setGeometry(Geometry geometry)
@@ -47,8 +123,14 @@ public abstract class SpaceObject{
         return objectPhysics;
     }
     
-    public getMesh()
+    public Sphere getMesh()
     {
         return objectMesh;
     }
+    
+    public Vector3f getPosition()
+    {
+        return objectGeo.getLocalTranslation();
+    }
+    
 }
