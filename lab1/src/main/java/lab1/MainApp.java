@@ -36,7 +36,7 @@ public class MainApp extends SimpleApplication {
     private void jupiterCreation()
     {
         //jupiter mesh
-        Sphere sphereMesh = new Sphere(64, 64, physics.getJupiterRadius());
+        Sphere sphereMesh = new Sphere(256, 256, physics.getJupiterRadius());
         sphereMesh.setTextureMode(Sphere.TextureMode.Projected);
         
         //texture and material of jupiter
@@ -58,7 +58,8 @@ public class MainApp extends SimpleApplication {
         jupiterGeo.setLocalTranslation(physics.getJupiterPosition());
          
         //jupiter physics
-        jupiterGeo.addControl(new RigidBodyControl(20000000.0f));
+        jupiterGeo.addControl(new RigidBodyControl(0.0f));
+        jupiterGeo.getControl(RigidBodyControl.class).setAngularVelocity(new Vector3f(1,-0.5f,-1));
         bulletAppState.getPhysicsSpace().add(jupiterGeo.getControl(RigidBodyControl.class));
         
         //attach to main scene
@@ -69,22 +70,23 @@ public class MainApp extends SimpleApplication {
     private void voyagerCreation()
     {
         //voyager mesh
-        Box voyagerMesh = new Box(0.5f, 0.3f, 0.3f);
+        Box voyagerMesh = new Box(0.9f, 0.5f, 0.3f);
         //voyager material
-        Material voyagerMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");        
-        voyagerMat.setColor("Color", ColorRGBA.Blue);
+        Texture voyagerTexture = assetManager.loadTexture("img/Voyager.png");
+        voyagerTexture.setWrap(Texture.WrapMode.Repeat);
+        Material voyagerMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        voyagerMat.setTexture("ColorMap",voyagerTexture);
         //voyager geometry
         voyagerGeo = new Geometry("Voyager", voyagerMesh);
         voyagerGeo.setMaterial(voyagerMat);   
+        //voyager position
+        voyagerGeo.setLocalTranslation(physics.getVoyagerPosition());
         //voyager physics
         RigidBodyControl voyagerPhy = new RigidBodyControl(2000.0f);
         voyagerGeo.addControl(voyagerPhy);             
         bulletAppState.getPhysicsSpace().add(voyagerPhy);
-        voyagerPhy.setLinearVelocity(new Vector3f(10.0f, 0, 0));
+        voyagerPhy.setLinearVelocity(physics.getDirectVector());        
         
-        
-        //voyager position
-        voyagerGeo.setLocalTranslation(physics.getVoyagerPosition());
         
         //attach to main scene
         rootNode.attachChild(voyagerGeo);
@@ -96,12 +98,12 @@ public class MainApp extends SimpleApplication {
     public void simpleInitApp() {
         // configure cam to look at scene
         flyCam.setMoveSpeed(15f);
-        cam.setLocation(new Vector3f(20.0f, 0.0f, 40.0f));
+        cam.setLocation(new Vector3f(0.0f, 0.0f, 80.0f));
         
         //set up physics game
         bulletAppState = new BulletAppState();
         stateManager.attach(bulletAppState);        
-        bulletAppState.getPhysicsSpace().setGravity(new Vector3f(0,0,0));
+        //bulletAppState.getPhysicsSpace().setGravity(new Vector3f(0,0,0));
         
         //set up physics/create objects
         physics = new Physics();
@@ -112,13 +114,12 @@ public class MainApp extends SimpleApplication {
     
     
     @Override 
-    public void update()
+    public void simpleUpdate(float tpf)
     {
         //jupiter rotation
         jupiterGeo.rotate(0.0f, 0.0f, 0.01f);
-        //jupiter change gravity TODO
-        //voyagerGeo.getControl(RigidBodyControl.class).setGravity(physics.getDirectVector());
+        //voyager new positioning  
+        voyagerGeo.getControl(RigidBodyControl.class).setGravity(physics.getGravity(voyagerGeo.getLocalTranslation()));
         
-        super.update();
     }
 }

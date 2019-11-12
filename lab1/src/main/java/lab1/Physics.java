@@ -15,12 +15,10 @@ public class Physics{
     private Vector3f directVector;
     private float voyagerWeight;
     
-    private final static float jupiterRadius = 2f;
+    private final static float G = 0.05f;
+    private final static float jupiterRadius = 4.4f;
+    private final static float jupiterWeight = 30000f;
     
-    private float getPolarRadius(float x, float y)
-    {
-        return (float) Math.sqrt((double) (x*x + y*y));
-    }
     
     private void inputVals()
     {
@@ -40,8 +38,6 @@ public class Physics{
             this.directVector.x = Float.valueOf(in.next()).floatValue(); 
             this.directVector.y = Float.valueOf(in.next()).floatValue(); 
             this.directVector.z = Float.valueOf(in.next()).floatValue();
-            
-            
         }
         catch (FileNotFoundException ex)  
         {
@@ -73,8 +69,17 @@ public class Physics{
         return directVector;
     }
     
-    public Vector3f getGravity()
+    public Vector3f getGravity(Vector3f newVoyagerPosition)
     {
-        return jupiterPosition;
+        voyagerPosition = newVoyagerPosition;
+        Vector3f delta = new Vector3f(0, 0, 0);
+        delta.x = jupiterPosition.x - voyagerPosition.x;
+        delta.y = jupiterPosition.y - voyagerPosition.y;
+        delta.z = jupiterPosition.z - voyagerPosition.z;
+    
+        float len = (float)Math.sqrt((double) (delta.x*delta.x + delta.y*delta.y + delta.z*delta.z));
+        float accel = G*jupiterWeight/(len*len);
+        Vector3f gravity = new Vector3f(accel*delta.x/len, accel*delta.y/len, accel*delta.z/len);
+        return gravity;
     }
 }
