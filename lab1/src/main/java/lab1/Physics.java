@@ -13,20 +13,15 @@ public class Physics{
     private Vector3f jupiterPosition;
     private Vector3f voyagerPosition;
     private Vector3f directVector;
-    private float voyagerWeight;
     
     private final static float G = 0.05f;
     private final static float jupiterRadius = 4.4f;
     private final static float jupiterWeight = 30000f;
     
     
-    private void inputVals()
+    public void inputVals(String path)
     {
-        this.jupiterPosition = new Vector3f();
-        this.voyagerPosition = new Vector3f();
-        this.directVector = new Vector3f();
-        File file = new File("src/main/java/lab1/input.txt");
-        
+        File file = new File(path);
         try{
             Scanner in = new Scanner(file);
             this.jupiterPosition.x = Float.valueOf(in.next()).floatValue();
@@ -46,7 +41,9 @@ public class Physics{
     }
     
     public Physics(){
-        inputVals();
+        this.jupiterPosition = new Vector3f(0, 0, 0);
+        this.voyagerPosition = new Vector3f(jupiterRadius*2f, jupiterRadius*2f, jupiterRadius*2f);
+        this.directVector = new Vector3f(0,0,0);
     }
     
     public float getJupiterRadius()

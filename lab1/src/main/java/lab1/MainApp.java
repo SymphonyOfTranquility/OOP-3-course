@@ -107,6 +107,7 @@ public class MainApp extends SimpleApplication {
         
         //set up physics/create objects
         physics = new Physics();
+        physics.inputVals("src/main/resources/input.txt");
         jupiterCreation();
         voyagerCreation();
         
