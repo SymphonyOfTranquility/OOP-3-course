@@ -1,29 +1,19 @@
 package lab1;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.app.SimpleApplication;
-import com.jme3.light.DirectionalLight;
+import com.jme3.app.state.AbstractAppState;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState.BlendMode;
-import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.texture.Texture;
-import com.jme3.asset.TextureKey;
-import com.jme3.math.Quaternion;
-import com.jme3.math.FastMath;
-import com.jme3.util.TangentBinormalGenerator;
 import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.renderer.Camera;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.scene.Node;
 import java.io.*;
 import java.util.Scanner;
 
-public abstract class SpaceObject{
+public abstract class SpaceObject extends AbstractAppState{
     
     protected Sphere objectMesh;
     protected Geometry objectGeo;
@@ -31,6 +21,7 @@ public abstract class SpaceObject{
     protected RigidBodyControl objectPhysics;
     protected String objectName;
     protected float objectRadius;
+    public boolean isInit = false;
         
     public Vector3f inputPosition(String path)
     {
@@ -41,6 +32,7 @@ public abstract class SpaceObject{
             position.x = (float) in.nextFloat();
             position.y = (float) in.nextFloat();
             position.z = (float) in.nextFloat();
+            in.close();
             return position;
         }
         catch (Exception ex){
@@ -56,6 +48,7 @@ public abstract class SpaceObject{
             float mass = 0;
             for (int i = 0;i < 4;++i)
                 mass = (float) in.nextFloat();
+            in.close();
             return mass;
         }
         catch (Exception ex){
@@ -90,7 +83,8 @@ public abstract class SpaceObject{
         
         
         //attach to main scene
-        rootNode.attachChild(objectGeo);    
+        rootNode.attachChild(objectGeo);  
+    	isInit = true;
     }
     
     
