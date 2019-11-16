@@ -9,7 +9,6 @@ public class JupiterTest {
 	@BeforeClass
 	public static void initApp1()
 	{
-		
 		app1 = new MainApp();
         Runnable task = new Runnable() {
             public void run() {
@@ -24,6 +23,7 @@ public class JupiterTest {
         {
             Thread.yield();
         }
+       
 	}
 
 	@Test

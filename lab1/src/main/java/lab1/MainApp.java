@@ -44,6 +44,6 @@ public class MainApp extends SimpleApplication {
         //jupiter rotation
         jupiter.getGeometry().rotate(0.0f, 0.0f, 0.01f);
         //voyager new positioning  
-        voyager.getPhysics().setGravity(Physics.getGravity(voyager, jupiter));        
+        voyager.getPhysics().setGravity(Physics.getGravity(voyager.getPosition(), jupiter.getPosition(), jupiter.getWeight()));        
     }
 }

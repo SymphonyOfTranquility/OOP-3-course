@@ -23,8 +23,8 @@ public class VoyagerTest {
 		app = new MainApp();
         Runnable task = new Runnable() {
             public void run() {
-                app.setShowSettings(false);
-                app.start();
+            	app.setShowSettings(false);
+            	app.start();
             }
         };
         Thread thread = new Thread(task);
