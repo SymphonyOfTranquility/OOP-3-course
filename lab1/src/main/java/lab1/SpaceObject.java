@@ -63,7 +63,8 @@ public abstract class SpaceObject extends AbstractAppState{
         //texture and material of object
         Texture jupiterTexture = assetManager.loadTexture("img/"+objectName+".jpg");
         jupiterTexture.setWrap(Texture.WrapMode.Repeat);
-        objectMaterial = (Material) assetManager.loadAsset(new AssetKey("Common/MatDefs/Misc/Unshaded.j3md"));
+        
+        objectMaterial = makeMaterial(assetManager);
         objectMaterial.setTexture("ColorMap", jupiterTexture);
                 
         //object geometry
@@ -87,7 +88,7 @@ public abstract class SpaceObject extends AbstractAppState{
         	throw ex;
         }
         //object physics
-        makePhysics(physicsMass);
+        objectPhysics = makePhysics(physicsMass);
         setPhysics(objectPhysics);
         
         bulletAppState.getPhysicsSpace().add(objectPhysics);
@@ -95,6 +96,11 @@ public abstract class SpaceObject extends AbstractAppState{
         //attach to main scene
         rootNode.attachChild(objectGeo);  
     	isInit = true;
+    }
+    
+    public Material makeMaterial(AssetManager assetManager)
+    {
+    	return new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     }
     
     public Geometry makeGeometry(String nameGeometry, Sphere meshGeometry)
