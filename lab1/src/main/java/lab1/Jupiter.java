@@ -1,5 +1,10 @@
 package lab1;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.shape.Sphere;
@@ -25,9 +30,10 @@ public class Jupiter extends SpaceObject{
     }
     
     @Override
-    public void setStartupParametrs(Node rootNode, BulletAppState bulletAppState, AssetManager assetManager)
+    public void setStartupParametrs(Node rootNode, BulletAppState bulletAppState, 
+    		AssetManager assetManager, String pathToFile) throws NoSuchElementException, FileNotFoundException 
     {
-        super.setStartupParametrs(rootNode, bulletAppState, assetManager);
+        super.setStartupParametrs(rootNode, bulletAppState, assetManager, pathToFile);
         //object rotate
         bulletAppState.getPhysicsSpace().remove(objectPhysics);
         objectGeo.removeControl(objectPhysics);  

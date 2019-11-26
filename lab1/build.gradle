@@ -30,6 +30,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:3.1.0'
     
     //jmonkeyengine libs
     compile "org.jmonkeyengine:jme3-core:$jmonkeyengine_version"

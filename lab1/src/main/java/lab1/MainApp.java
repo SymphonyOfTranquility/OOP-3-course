@@ -1,5 +1,10 @@
 package lab1;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
 import com.jme3.bullet.BulletAppState;
@@ -27,9 +32,15 @@ public class MainApp extends SimpleApplication {
         //set up physics/create objects
         jupiter = new Jupiter();
         voyager = new Voyager();
-        jupiter.setStartupParametrs(rootNode, bulletAppState, assetManager);
-        voyager.setStartupParametrs(rootNode, bulletAppState, assetManager);
-        voyager.startMoving();
+        try {
+        	String pathToFile = "src/main/resources/";
+	        jupiter.setStartupParametrs(rootNode, bulletAppState, assetManager, pathToFile);
+	        voyager.setStartupParametrs(rootNode, bulletAppState, assetManager, pathToFile);
+	        voyager.startMoving(pathToFile);
+        }
+        catch (NoSuchElementException | FileNotFoundException ex) {
+        	System.exit(0);
+        }        
         
         stateManager.attach(jupiter);
         stateManager.attach(voyager);
