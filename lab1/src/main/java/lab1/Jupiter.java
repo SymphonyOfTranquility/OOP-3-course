@@ -1,8 +1,6 @@
 package lab1;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 import com.jme3.asset.AssetManager;
@@ -19,9 +17,9 @@ public class Jupiter extends SpaceObject{
     
     public Jupiter()
     {
-        objectName = "Jupiter";
-        objectRadius = 4.4f;
-        objectMesh = new Sphere(64, 64, objectRadius);
+        spaceObjectName = "Jupiter";
+        spaceObjectRadius = 4.4f;
+        spaceObjectMesh = new Sphere(64, 64, spaceObjectRadius);
     }
     
     public float getWeight()
@@ -34,16 +32,16 @@ public class Jupiter extends SpaceObject{
     		AssetManager assetManager, String pathToFile) throws NoSuchElementException, FileNotFoundException 
     {
         super.setStartupParametrs(rootNode, bulletAppState, assetManager, pathToFile);
-        //object rotate
-        bulletAppState.getPhysicsSpace().remove(objectPhysics);
-        objectGeo.removeControl(objectPhysics);  
+        //spaceObject rotate
+        bulletAppState.getPhysicsSpace().remove(spaceObjectPhysics);
+        spaceObjectGeo.removeControl(spaceObjectPhysics);  
         
         Quaternion roll = new Quaternion();
         roll.fromAngleAxis( FastMath.PI , new Vector3f(-1f,1f,1f) );
-        objectGeo.setLocalRotation(roll);
+        spaceObjectGeo.setLocalRotation(roll);
         
-        objectGeo.addControl(objectPhysics);
-        bulletAppState.getPhysicsSpace().add(objectPhysics);
+        spaceObjectGeo.addControl(spaceObjectPhysics);
+        bulletAppState.getPhysicsSpace().add(spaceObjectPhysics);
     }
     
 }

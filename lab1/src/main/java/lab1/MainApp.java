@@ -1,8 +1,6 @@
 package lab1;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 import com.jme3.app.SimpleApplication;

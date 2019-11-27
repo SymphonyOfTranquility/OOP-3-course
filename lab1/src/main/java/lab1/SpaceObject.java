@@ -1,7 +1,6 @@
 package lab1;
 
 import java.util.NoSuchElementException;
-import com.jme3.asset.AssetKey;
 import com.jme3.asset.AssetManager;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.material.Material;
@@ -13,17 +12,16 @@ import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.scene.Node;
 import java.io.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class SpaceObject extends AbstractAppState{
     
-    protected Sphere objectMesh;
-    protected Geometry objectGeo;
-    protected Material objectMaterial;
-    protected RigidBodyControl objectPhysics;
-    protected String objectName;
-    protected float objectRadius;
+    protected Sphere spaceObjectMesh;
+    protected Geometry spaceObjectGeo;
+    protected Material spaceObjectMaterial;
+    protected RigidBodyControl spaceObjectPhysics;
+    protected String spaceObjectName;
+    protected float spaceObjectRadius;
     public boolean isInit = false;
         
     public Vector3f inputPosition(String path) throws NoSuchElementException, FileNotFoundException {
@@ -59,22 +57,22 @@ public abstract class SpaceObject extends AbstractAppState{
     
     public void setStartupParametrs(Node rootNode, BulletAppState bulletAppState, 
     		AssetManager assetManager, String pathToFile) throws NoSuchElementException, FileNotFoundException {
-        objectMesh.setTextureMode(Sphere.TextureMode.Projected);        
+        spaceObjectMesh.setTextureMode(Sphere.TextureMode.Projected);        
         //texture and material of object
-        Texture jupiterTexture = assetManager.loadTexture("img/"+objectName+".jpg");
+        Texture jupiterTexture = assetManager.loadTexture("img/"+spaceObjectName+".jpg");
         jupiterTexture.setWrap(Texture.WrapMode.Repeat);
         
-        objectMaterial = makeMaterial(assetManager);
-        objectMaterial.setTexture("ColorMap", jupiterTexture);
+        spaceObjectMaterial = makeMaterial(assetManager);
+        spaceObjectMaterial.setTexture("ColorMap", jupiterTexture);
                 
-        //object geometry
-        objectGeo = makeGeometry(objectName, objectMesh);
-        objectGeo.setMaterial(objectMaterial);
+        //spaceObject geometry
+        spaceObjectGeo = makeGeometry(spaceObjectName, spaceObjectMesh);
+        spaceObjectGeo.setMaterial(spaceObjectMaterial);
                 
-        //object position
-        String path = pathToFile+objectName+".txt";
+        //spaceObject position
+        String path = pathToFile+spaceObjectName+".txt";
         try {
-        	objectGeo.setLocalTranslation(inputPosition(path));
+        	spaceObjectGeo.setLocalTranslation(inputPosition(path));
         }
         catch (NoSuchElementException | FileNotFoundException ex) {
         	throw ex;
@@ -87,14 +85,14 @@ public abstract class SpaceObject extends AbstractAppState{
         catch (NoSuchElementException | FileNotFoundException ex) {
         	throw ex;
         }
-        //object physics
-        objectPhysics = makePhysics(physicsMass);
-        setPhysics(objectPhysics);
+        //spaceObject physics
+        spaceObjectPhysics = makePhysics(physicsMass);
+        setPhysics(spaceObjectPhysics);
         
-        bulletAppState.getPhysicsSpace().add(objectPhysics);
+        bulletAppState.getPhysicsSpace().add(spaceObjectPhysics);
         
         //attach to main scene
-        rootNode.attachChild(objectGeo);  
+        rootNode.attachChild(spaceObjectGeo);  
     	isInit = true;
     }
     
@@ -115,50 +113,50 @@ public abstract class SpaceObject extends AbstractAppState{
     
     public void setGeometry(Geometry geometry)
     {
-        objectGeo = geometry;
+        spaceObjectGeo = geometry;
     }
     
     public Geometry getGeometry()
     {
-        return objectGeo;
+        return spaceObjectGeo;
     }
         
     public void setMaterial(Material material)
     {
-        objectMaterial = material;
+        spaceObjectMaterial = material;
     }
     
     public Material getMaterial()
     {
-        return objectMaterial;
+        return spaceObjectMaterial;
     }
     
     public void setPhysics(RigidBodyControl physics)
     {
-        objectPhysics = physics;
-        objectGeo.addControl(objectPhysics);
+        spaceObjectPhysics = physics;
+        spaceObjectGeo.addControl(spaceObjectPhysics);
     }
     
     public RigidBodyControl getPhysics()
     {
-        return objectPhysics;
+        return spaceObjectPhysics;
     }
     
     public void setMesh(Sphere mesh)
     {
-        objectMesh = mesh;
+        spaceObjectMesh = mesh;
     }
     public Sphere getMesh()
     {
-        return objectMesh;
+        return spaceObjectMesh;
     }
     
     public Vector3f getPosition()
     {
-        return objectGeo.getLocalTranslation();
+        return spaceObjectGeo.getLocalTranslation();
     }
     
     public float getRadius() {
-    	return objectRadius;
+    	return spaceObjectRadius;
     }
 }
