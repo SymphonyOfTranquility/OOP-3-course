@@ -1,5 +1,5 @@
 Validation success
-Using StAX parser
+Using SAX parser
 Name: Slivki linivki vaflya
 ID: ID-1
 Energy: 420

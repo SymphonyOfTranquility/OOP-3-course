@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="publication.xsd">
+
+    <Paper id="ID-1">
+        <Title>Мрія</Title>
+        <Type>newspaper</Type>
+        <Monthly>true</Monthly>
+
+        <Chars>
+            <Colored>true</Colored>
+            <Size>20</Size>
+            <Glossy>false</Glossy>
+            <SubscriptionIndex>true</SubscriptionIndex>
+        </Chars>
+    </Paper>
+
+
+    <Paper id="ID-2">
+        <Title>Всесвіт</Title>
+        <Type>magazine</Type>
+        <Monthly>true</Monthly>
+
+        <Chars>
+            <Colored>true</Colored>
+            <Size>50</Size>
+            <Glossy>true</Glossy>
+            <SubscriptionIndex>true</SubscriptionIndex>
+        </Chars>
+    </Paper>
+
+
+    <Paper id="ID-3">
+        <Title>Вісті</Title>
+        <Type>newspaper</Type>
+        <Monthly>false</Monthly>
+
+        <Chars>
+            <Colored>true</Colored>
+            <Size>15</Size>
+            <Glossy>false</Glossy>
+            <SubscriptionIndex>true</SubscriptionIndex>
+        </Chars>
+    </Paper>
+
+
+    <Paper id="ID-4">
+        <Title>Борезіль</Title>
+        <Type>magazine</Type>
+        <Monthly>true</Monthly>
+
+        <Chars>
+            <Colored>true</Colored>
+            <Size>20</Size>
+            <Glossy>false</Glossy>
+            <SubscriptionIndex>true</SubscriptionIndex>
+        </Chars>
+    </Paper>
+
+
+    <Paper id="ID-5">
+        <Title>Екологічні проблеми</Title>
+        <Type>booklet</Type>
+        <Monthly>true</Monthly>
+
+        <Chars>
+            <Colored>true</Colored>
+            <Size>20</Size>
+            <Glossy>false</Glossy>
+            <SubscriptionIndex>false</SubscriptionIndex>
+        </Chars>
+    </Paper>
+
+</Papers>

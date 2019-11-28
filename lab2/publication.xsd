@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Papers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Paper" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Title" type="xs:string"/>
+                            <xs:element name="Type">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="newspaper"/>
+                                        <xs:enumeration value="magazine"/>
+                                        <xs:enumeration value="booklet"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <xs:element name="Monthly" type="xs:boolean"/>
+
+                            <xs:element name="Chars">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Colored" type="xs:boolean"/>
+                                        <xs:element name="Size" type="xs:positiveInteger"/>
+                                        <xs:element name="Glossy" type="xs:boolean"/>
+                                        <xs:element name="SubscriptionIndex" type="xs:boolean"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+
+                        <xs:attribute name="id" type="xs:ID" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--
+     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+    <sch:pattern>
+        <sch:rule context="Paper">
+            <sch:assert test="(Glossy = false and Type = 'newspaper') or Glossy = true">
+                If Glossy false then the type must be newspaper.
+            </sch:assert>
+        </sch:rule>
+        <sch:rule context="*[SubscriptionIndex]">
+            <sch:assert test="(SubscriptionIndex = false and Type = 'booklet') or SubscriptionIndex = true">
+                If SubscriptionIndex false then the type must be booklet.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    -->
+</xs:schema>
