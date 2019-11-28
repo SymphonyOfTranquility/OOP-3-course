@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Candies xsi:schemaLocation="candy.xsd">
+
+<Candy id="1">
+    <Name>Слівкі лінівкі вафля</Name>
+    <Energy>420</Energy>
+    <Type filling="milk cream">Chocolate with filling</Type>
+
+    <Ingredients>
+        <Water>15</Water>
+        <Sugar>30</Sugar>
+        <ChocolateType>Black chocolate</ChocolateType>
+        <Vanilla>5</Vanilla>
+    </Ingredients>
+
+    <Value>
+        <Proteins>15</Proteins>
+        <Fat>5</Fat>
+        <Carbon>80</Carbon>
+    </Value>
+
+    <Production>Рошен</Production>
+</Candy>
+
+
+<Candy id="2">
+    <Name>Джеллі</Name>
+    <Energy>450</Energy>
+    <Type>Jelly</Type>
+
+    <Ingredients>
+        <Water>30</Water>
+        <Sugar>40</Sugar>
+        <Fructose>15</Fructose>
+        <Vanilla>10</Vanilla>
+    </Ingredients>
+    
+    <Value>
+        <Proteins>5</Proteins>
+        <Fat>3</Fat>
+        <Carbon>92</Carbon>
+    </Value>
+
+    <Production>Рошен</Production>
+</Candy>
+
+
+<Candy id="3">
+    <Name>Капрі молоко</Name>
+    <Energy>370</Energy>
+    <Type>Caramel</Type>
+
+    <Ingredients>
+        <Water>20</Water>
+        <Sugar>40</Sugar>
+        <Vanilla>15</Vanilla>
+    </Ingredients>
+
+    <Value>
+        <Proteins>20</Proteins>
+        <Fat>10</Fat>
+        <Carbon>70</Carbon>
+    </Value>
+
+    <Production>Рошен</Production>
+</Candy>
+
+
+<Candy id="4">
+    <Name>Трюфель</Name>
+    <Energy>440</Energy>
+    <Type filling="chocolate cream">Chocolate with filling</Type>
+
+    <Ingredients>
+        <Water>15</Water>
+        <Sugar>35</Sugar>
+        <ChocolateType>Milk chocolate</ChocolateType>
+        <Vanilla>5</Vanilla>
+    </Ingredients>
+
+    <Value>
+        <Proteins>10</Proteins>
+        <Fat>5</Fat>
+        <Carbon>85</Carbon>
+    </Value>
+
+    <Production>Світоч</Production>
+</Candy>
+
+
+<Candy id="5">
+    <Name>ФЛОРЕНС</Name>
+    <Energy>480</Energy>
+    <Type filling="chocolate cream with nut">Chocolate with filling</Type>
+
+    <Ingredients>
+        <Water>20</Water>
+        <Sugar>45</Sugar>
+        <ChocolateType>White chocolate</ChocolateType>
+        <Vanilla>10</Vanilla>
+    </Ingredients>
+
+    <Value>
+        <Proteins>3</Proteins>
+        <Fat>1</Fat>
+        <Carbon>96</Carbon>
+    </Value>
+
+    <Production>АВК</Production>
+</Candy>
+
+</Candies>

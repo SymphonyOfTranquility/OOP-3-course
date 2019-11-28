@@ -1,0 +1,75 @@
+Validation success
+Using StAX parser
+Name: Slivki linivki vaflya
+ID: ID-1
+Energy: 420
+Type: Chocolate with filling
+Filling: milk cream
+Ingredients
+	Water: 15
+	ChocolateType: Black chocolate
+	Vanilla: 5
+	Sugar: 30
+Value
+	Proteins: 15
+	Fat: 5
+	Carbon: 80
+Production: Roshen
+Name: Jelly
+ID: ID-2
+Energy: 450
+Type: Jelly
+Ingredients
+	Water: 30
+	Vanilla: 10
+	Fructose: 15
+	Sugar: 40
+Value
+	Proteins: 5
+	Fat: 3
+	Carbon: 92
+Production: Roshen
+Name: Kapri moloko
+ID: ID-3
+Energy: 370
+Type: Caramel
+Ingredients
+	Water: 20
+	Vanilla: 15
+	Sugar: 40
+Value
+	Proteins: 20
+	Fat: 10
+	Carbon: 70
+Production: Roshen
+Name: Truffle
+ID: ID-4
+Energy: 440
+Type: Chocolate with filling
+Filling: chocolate cream
+Ingredients
+	Water: 15
+	ChocolateType: Milk chocolate
+	Vanilla: 5
+	Sugar: 35
+Value
+	Proteins: 10
+	Fat: 5
+	Carbon: 85
+Production: Svitoch
+Name: FLORENCE
+ID: ID-5
+Energy: 480
+Type: Chocolate with filling
+Filling: chocolate cream with nut
+Ingredients
+	Water: 20
+	ChocolateType: White chocolate
+	Vanilla: 10
+	Sugar: 45
+Value
+	Proteins: 3
+	Fat: 1
+	Carbon: 96
+Production: AVK
+FLORENCEJellyKapri molokoSlivki linivki vaflyaTruffle

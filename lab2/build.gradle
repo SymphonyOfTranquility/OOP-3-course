@@ -38,7 +38,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'lab2.App'
+    mainClassName = 'lab.App'
 }
 
 test {

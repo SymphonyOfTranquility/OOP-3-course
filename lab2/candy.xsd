@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Candies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Candy" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Name" type="xs:string"/>
+                            <xs:element name="Energy" type="xs:positiveInteger"/>
+
+                            <xs:element name="Type">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="filling" type="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="Ingredients">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Water" type="xs:positiveInteger" minOccurs="0"/>
+                                        <xs:element name="Sugar" type="xs:positiveInteger" minOccurs="0"/>
+                                        <xs:element name="Fructose" type="xs:positiveInteger" minOccurs="0"/>
+                                        <xs:element name="ChocolateType" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="Vanilla" type="xs:positiveInteger" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="Value">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Proteins" type="xs:positiveInteger"/>
+                                        <xs:element name="Fat" type="xs:positiveInteger"/>
+                                        <xs:element name="Carbon" type="xs:positiveInteger"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="Production" type="xs:string"/>
+                        </xs:sequence>
+
+                        <xs:attribute name="id" type="xs:ID" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
