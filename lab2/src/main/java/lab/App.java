@@ -12,11 +12,11 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
-        String xmlFile = "candy.xml";
+        String xmlFile = "publication.xml";
 
         InputStream xmlStream = new FileInputStream(xmlFile);
 
-        if(SchemaValidator.validateXml("candy.xsd", xmlStream))
+        if(SchemaValidator.validateXml("publication.xsd", xmlStream))
             Logger.log("Validation success");
         else
         {
@@ -27,7 +27,7 @@ public class App {
         String parserType = args[0];
 
         xmlStream = new FileInputStream(xmlFile);
-        String interestNode = "Candy";
+        String interestNode = "Paper";
 
         GeneralParserInterface parser;
 
@@ -46,18 +46,18 @@ public class App {
                 break;
         }
 
-        CandyParserHandler handler = new CandyParserHandler(parser);
+        PaperParserHandler handler = new PaperParserHandler(parser);
 
-        List<Candy> candies = handler.parse();
-        for (Candy candy : candies) {
-            Logger.log(candy.toString());
+        List<Paper> papers = handler.parse();
+        for (Paper paper : papers) {
+            Logger.log(paper.toString());
         }
 
-        CandyComparator candyc = new CandyComparator();
-        candies.sort(candyc);
+        PaperComparator paperComp = new PaperComparator();
+        papers.sort(paperComp);
 
-        for (Candy candy : candies) {
-            Logger.log(candy.name);
+        for (Paper paper : papers) {
+            Logger.log(paper.title + ", ");
         }
     }
 }

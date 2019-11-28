@@ -38,19 +38,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <!--
-     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-    <sch:pattern>
-        <sch:rule context="Paper">
-            <sch:assert test="(Glossy = false and Type = 'newspaper') or Glossy = true">
-                If Glossy false then the type must be newspaper.
-            </sch:assert>
-        </sch:rule>
-        <sch:rule context="*[SubscriptionIndex]">
-            <sch:assert test="(SubscriptionIndex = false and Type = 'booklet') or SubscriptionIndex = true">
-                If SubscriptionIndex false then the type must be booklet.
-            </sch:assert>
-        </sch:rule>
-    </sch:pattern>
-    -->
 </xs:schema>

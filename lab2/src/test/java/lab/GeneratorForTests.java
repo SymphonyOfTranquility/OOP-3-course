@@ -9,56 +9,39 @@ final class GeneratorForTests {
     private GeneratorForTests(){}
     static InputStream generateXml(boolean bySchema) {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<Candies xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-                "xsi:noNamespaceSchemaLocation=\"candy.xsd\">" +
-                "<Candy id=\"ID-1\">" +
-                "<Name>Slivki linivki vaflya</Name>";
+                "<Papers xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "xsi:noNamespaceSchemaLocation=\"publication.xsd\">" +
+                "<Paper id=\"ID-1\">" +
+                "<Title>Mriya</Title>";
         if (bySchema)
-            xml += "<Energy>420</Energy>";
-        xml += "<Type filling=\"milk cream\">Chocolate with filling</Type>" +
-                "<Ingredients>"+
-                "<Water>15</Water>" +
-                "<Sugar>30</Sugar>" +
-                "<Fructose>15</Fructose>" +
-                "<ChocolateType>Black chocolate</ChocolateType>" +
-                "<Vanilla>5</Vanilla>"+
-                "</Ingredients>" +
-                "<Value>" +
-                "<Proteins>15</Proteins>" +
-                "<Fat>5</Fat>" +
-                "<Carbon>80</Carbon>" +
-                "</Value>" +
-                "<Production>Roshen</Production>\n" +
-                "</Candy>" +
-                "</Candies>";
+            xml += "<Type>newspaper</Type>";
+        xml += "<Monthly>true</Monthly>" +
+                "<Chars>"+
+                "<Colored>true</Colored>" +
+                "<Size>30</Size>" +
+                "<Glossy>false</Glossy>" +
+                "<SubscriptionIndex>true</SubscriptionIndex>" +
+                "</Chars>" +
+                "</Paper>" +
+                "</Papers>";
         return new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8));
     }
 
-    static Candy generateCandy() {
-        Candy candy = new Candy();
-        candy.id = "ID-1";
-        candy.name = "Slivki linivki vaflya";
-        candy.energy = "420";
-        candy.type = "Chocolate with filling";
-        candy.filling = "milk cream";
+    static Paper generatePaper() {
+        Paper paper = new Paper();
+        paper.id = "ID-1";
+        paper.title = "Mriya";
+        paper.monthly = true;
+        paper.type = "newspaper";
 
-        HashMap<String, String> ingredients = new HashMap<>();
-        ingredients.put("Water", "15");
-        ingredients.put("Sugar", "30");
-        ingredients.put("ChocolateType", "Black chocolate");
-        ingredients.put("Vanilla", "5");
 
-        candy.ingredients = ingredients;
+        HashMap<String, Integer> chars = new HashMap<>();
+        chars.put("Colored", 1);
+        chars.put("Size", 30);
+        chars.put("Glossy", 0);
+        chars.put("SubscriptionIndex", 1);
 
-        HashMap<String, Integer> value = new HashMap<>();
-        value.put("Proteins", 15);
-        value.put("Fat", 5);
-        value.put("Carbon", 80);
-
-        candy.value = value;
-
-        candy.production = "Roshen";
-
-        return candy;
+        paper.chars = chars;
+        return paper;
     }
 }

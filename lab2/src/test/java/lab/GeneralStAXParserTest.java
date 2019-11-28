@@ -13,24 +13,19 @@ class GeneralStAXParserTest {
     @Test
     void test_xml_parsing() throws XMLStreamException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
-        String interestNode = "Candy";
+        String interestNode = "Paper";
 
         GeneralParserInterface parser = new GeneralStAXParser(xmlFile, interestNode);
 
         Map<String, String> expected = new HashMap<>();
         expected.put("id", "ID-1");
-        expected.put("Name", "Slivki linivki vaflya");
-        expected.put("Energy", "420");
-        expected.put("filling", "milk cream");
-        expected.put("Type", "Chocolate with filling");
-        expected.put("Water", "15");
-        expected.put("Sugar", "30");
-        expected.put("Fructose", "15");
-        expected.put("ChocolateType", "Black chocolate");
-        expected.put("Vanilla", "5");
-        expected.put("Proteins", "15");
-        expected.put("Carbon", "80");
-        expected.put("Production", "Roshen");
+        expected.put("Title", "Mriya");
+        expected.put("Type", "newspaper");
+        expected.put("Monthly", "true");
+        expected.put("Colored", "true");
+        expected.put("Size", "30");
+        expected.put("Glossy", "false");
+        expected.put("SubscriptionIndex", "true");
 
         Map<String, String> actual = parser.getNextMap();
 
@@ -42,7 +37,7 @@ class GeneralStAXParserTest {
     @Test
     void test_is_next_map_func() throws XMLStreamException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
-        String interestNode = "Candy";
+        String interestNode = "Paper";
 
         GeneralParserInterface parser = new GeneralStAXParser(xmlFile, interestNode);
 
