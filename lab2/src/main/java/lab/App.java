@@ -12,11 +12,11 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
-        String xmlFile = "publication.xml";
+        String xmlFile = "paper.xml";
 
         InputStream xmlStream = new FileInputStream(xmlFile);
 
-        if(SchemaValidator.validateXml("publication.xsd", xmlStream))
+        if(SchemaValidator.validateXml("paper.xsd", xmlStream))
             Logger.log("Validation success");
         else
         {
@@ -50,7 +50,7 @@ public class App {
 
         List<Paper> papers = handler.parse();
         for (Paper paper : papers) {
-            Logger.log(paper.toString());
+            Logger.log(paper.toString() + "\n");
         }
 
         PaperComparator paperComp = new PaperComparator();

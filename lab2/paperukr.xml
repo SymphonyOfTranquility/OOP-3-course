@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="publication.xsd">
+        xsi:noNamespaceSchemaLocation="paper.xsd">
 
     <Paper id="ID-1">
         <Title>Мрія</Title>
