@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PaperParserHandlerTest {
     @Test
     void test_candy_parsing() {
-        GeneralParserInterface parserMock = Mockito.mock(GeneralSAXParser.class);
+        ParserInterface parserMock = Mockito.mock(SAXParser.class);
         Mockito.when(parserMock.isNextMap()).thenReturn(true).thenReturn(false);
 
         Map<String, String> retval = new HashMap<>();

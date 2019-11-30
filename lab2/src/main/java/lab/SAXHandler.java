@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GeneralSAXHandler extends DefaultHandler {
+public class SAXHandler extends DefaultHandler {
 
     private String thisElement;
     private String interestNode;
     private Map<String, String> resultEntry = new HashMap<>();
     private List<Map<String, String>> result = new ArrayList<>();
 
-    GeneralSAXHandler(String interestNode) {
+    SAXHandler(String interestNode) {
         this.interestNode = interestNode;
     }
 

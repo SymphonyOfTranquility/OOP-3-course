@@ -29,19 +29,19 @@ public class App {
         xmlStream = new FileInputStream(xmlFile);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser;
+        ParserInterface parser;
 
         switch (parserType) {
             case "1":
-                parser = new GeneralSAXParser(xmlStream, interestNode);
+                parser = new SAXParser(xmlStream, interestNode);
                 Logger.log("\nUsing SAX parser\n");
                 break;
             case "2":
-                parser = new GeneralDOMParser(xmlStream, interestNode);
+                parser = new DOMParser(xmlStream, interestNode);
                 Logger.log("\nUsing DOM parser\n");
                 break;
             default:
-                parser = new GeneralStAXParser(xmlStream, interestNode);
+                parser = new StAXParser(xmlStream, interestNode);
                 Logger.log("\nUsing StAX parser\n");
                 break;
         }

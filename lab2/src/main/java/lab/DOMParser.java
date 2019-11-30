@@ -17,12 +17,12 @@ import java.util.Map;
 
 @SuppressWarnings(value="unchecked")
 
-public class GeneralDOMParser implements GeneralParserInterface {
+public class DOMParser implements ParserInterface {
 
     private NodeList elementsList;
     private int elementNum = 0;
 
-    GeneralDOMParser(InputStream file, String interestNode) throws IOException, SAXException, ParserConfigurationException {
+    DOMParser(InputStream file, String interestNode) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         DocumentBuilder builder = factory.newDocumentBuilder();

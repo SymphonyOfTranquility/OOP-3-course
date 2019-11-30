@@ -17,7 +17,7 @@ class GeneralDOMParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralDOMParser(xmlFile, interestNode);
+        ParserInterface parser = new DOMParser(xmlFile, interestNode);
 
         Map<String, String> expected = new HashMap<>();
         expected.put("id", "ID-1");
@@ -41,7 +41,7 @@ class GeneralDOMParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralDOMParser(xmlFile, interestNode);
+        ParserInterface parser = new DOMParser(xmlFile, interestNode);
 
         assertTrue(parser.isNextMap());
 

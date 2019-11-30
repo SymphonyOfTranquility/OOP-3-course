@@ -2,7 +2,7 @@ package lab;
 
 import java.util.Map;
 
-interface GeneralParserInterface {
+interface ParserInterface {
     Map<String, String> getNextMap();
 
     boolean isNextMap();

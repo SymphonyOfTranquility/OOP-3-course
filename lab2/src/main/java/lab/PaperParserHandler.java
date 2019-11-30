@@ -7,9 +7,9 @@ import java.util.Map;
 
 class PaperParserHandler {
 
-    private GeneralParserInterface parser;
+    private ParserInterface parser;
 
-    PaperParserHandler(GeneralParserInterface parser) {
+    PaperParserHandler(ParserInterface parser) {
         this.parser = parser;
     }
 

@@ -17,7 +17,7 @@ class GeneralSAXParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralSAXParser(xmlFile, interestNode);
+        ParserInterface parser = new SAXParser(xmlFile, interestNode);
 
         Map<String, String> expected = new HashMap<>();
         expected.put("id", "ID-1");
@@ -41,7 +41,7 @@ class GeneralSAXParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralSAXParser(xmlFile, interestNode);
+        ParserInterface parser = new SAXParser(xmlFile, interestNode);
 
         assertTrue(parser.isNextMap());
 

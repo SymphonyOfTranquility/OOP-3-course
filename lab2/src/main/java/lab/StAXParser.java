@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class GeneralStAXParser implements GeneralParserInterface {
+public class StAXParser implements ParserInterface {
 
     private String thisElement;
     private XMLEventReader eventReader;
@@ -71,7 +71,7 @@ public class GeneralStAXParser implements GeneralParserInterface {
         return eventReader.hasNext();
     }
 
-    GeneralStAXParser(InputStream file, String interestNode) throws XMLStreamException {
+    StAXParser(InputStream file, String interestNode) throws XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         eventReader = factory.createXMLEventReader(new InputStreamReader(file));

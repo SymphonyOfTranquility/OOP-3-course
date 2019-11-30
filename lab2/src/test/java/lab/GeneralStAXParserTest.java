@@ -15,7 +15,7 @@ class GeneralStAXParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralStAXParser(xmlFile, interestNode);
+        ParserInterface parser = new StAXParser(xmlFile, interestNode);
 
         Map<String, String> expected = new HashMap<>();
         expected.put("id", "ID-1");
@@ -39,7 +39,7 @@ class GeneralStAXParserTest {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
-        GeneralParserInterface parser = new GeneralStAXParser(xmlFile, interestNode);
+        ParserInterface parser = new StAXParser(xmlFile, interestNode);
 
         assertTrue(parser.isNextMap());
 
