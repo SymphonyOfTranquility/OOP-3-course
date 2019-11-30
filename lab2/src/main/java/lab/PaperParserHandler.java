@@ -28,9 +28,9 @@ class PaperParserHandler {
             paper = new Paper();
             Map<String, Integer> chars = new HashMap<>();
 
-            for(Map.Entry<String, String> entry : paperMap.entrySet()) {
-                String key = entry.getKey();
-                String val = entry.getValue();
+            for(Map.Entry<String, String> currentTag : paperMap.entrySet()) {
+                String key = currentTag.getKey();
+                String val = currentTag.getValue();
                 switch (key) {
                     case "id":
                         paper.id = val;

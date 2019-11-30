@@ -34,7 +34,6 @@ final class GeneratorForTests {
         paper.monthly = true;
         paper.type = "newspaper";
 
-
         HashMap<String, Integer> chars = new HashMap<>();
         chars.put("Colored", 1);
         chars.put("Size", 30);

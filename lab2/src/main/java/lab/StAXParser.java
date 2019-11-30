@@ -12,6 +12,14 @@ public class StAXParser implements ParserInterface {
     private XMLEventReader eventReader;
     private String interestNode;
 
+    StAXParser(InputStream file, String interestNode) throws XMLStreamException {
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        eventReader = factory.createXMLEventReader(new InputStreamReader(file));
+
+        this.interestNode = interestNode;
+    }
+
     @Override
     public Map<String, String> getNextMap() {
         Map<String, String> result = new HashMap<>();
@@ -69,13 +77,5 @@ public class StAXParser implements ParserInterface {
     @Override
     public boolean isNextMap() {
         return eventReader.hasNext();
-    }
-
-    StAXParser(InputStream file, String interestNode) throws XMLStreamException {
-        XMLInputFactory factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
-        eventReader = factory.createXMLEventReader(new InputStreamReader(file));
-
-        this.interestNode = interestNode;
     }
 }

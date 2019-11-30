@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PaperComparatorTest {
     @Test
-    void test_candy_comparator() {
+    void testPaperComparator() {
         Paper a = GeneratorForTests.generatePaper();
 
         Paper b = GeneratorForTests.generatePaper();

@@ -11,9 +11,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeneralSAXParserTest {
+class SAXParserTest {
     @Test
-    void test_xml_parsing() throws IOException, SAXException, ParserConfigurationException {
+    void testXmlParsing() throws IOException, SAXException, ParserConfigurationException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
@@ -37,7 +37,7 @@ class GeneralSAXParserTest {
     }
 
     @Test
-    void test_is_next_map_func() throws IOException, SAXException, ParserConfigurationException {
+    void testIsNextMapFunc() throws IOException, SAXException, ParserConfigurationException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 

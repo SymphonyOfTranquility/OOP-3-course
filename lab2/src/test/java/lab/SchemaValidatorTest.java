@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SchemaValidatorTest {
     @Test
-    void test_valid_xml() {
+    void testValidXml() {
         assertTrue(SchemaValidator.validateXml("publication.xsd", GeneratorForTests.generateXml(true)));
     }
 
     @Test
-    void test_invalid_xml() {
+    void testInvalidXml() {
         assertFalse(SchemaValidator.validateXml("publication.xsd", GeneratorForTests.generateXml(false)));
     }
 }

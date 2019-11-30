@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PaperParserHandlerTest {
     @Test
-    void test_candy_parsing() {
+    void testPaperParsing() {
         ParserInterface parserMock = Mockito.mock(SAXParser.class);
         Mockito.when(parserMock.isNextMap()).thenReturn(true).thenReturn(false);
 

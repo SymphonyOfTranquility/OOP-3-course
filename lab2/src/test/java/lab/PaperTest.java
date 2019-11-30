@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PaperTest {
     @Test
-    void test_class_constructor() {
+    void testClassConstructor() {
         Paper paper = GeneratorForTests.generatePaper();
 
         assertEquals("ID-1", paper.id);
@@ -20,7 +20,7 @@ class PaperTest {
     }
 
     @Test
-    void test_equals() {
+    void testEquals() {
         Paper a = GeneratorForTests.generatePaper();
 
         Paper b = GeneratorForTests.generatePaper();

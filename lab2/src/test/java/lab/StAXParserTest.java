@@ -9,9 +9,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeneralStAXParserTest {
+class StAXParserTest {
     @Test
-    void test_xml_parsing() throws XMLStreamException {
+    void testXmlParsing() throws XMLStreamException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
@@ -35,7 +35,7 @@ class GeneralStAXParserTest {
     }
 
     @Test
-    void test_is_next_map_func() throws XMLStreamException {
+    void testIsNextMapFunc() throws XMLStreamException {
         InputStream xmlFile = GeneratorForTests.generateXml(true);
         String interestNode = "Paper";
 
