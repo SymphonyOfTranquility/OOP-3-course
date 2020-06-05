@@ -1,12 +1,19 @@
 package tableElements;
 
 public class JudgeAssistant extends Person {
-    private final int judgeId;
+    private final Integer judgeId;
 
-    JudgeAssistant(int id, String name, String surname, int judgeId) {
-        super(id, name, surname);
+    public JudgeAssistant(Integer id, String name, String surname, String login, Integer judgeId) {
+        super(id, name, surname, login);
         this.judgeId = judgeId;
     }
 
-    public int getJudgeId() { return judgeId; }
+    public Integer getJudgeId() { return judgeId; }
+
+    public String toTable() {
+        return  "<th>" + getId() + "</th>" +
+                "<th>" + getName() + "</th>" +
+                "<th>" + getSurname() + "</th>" +
+                "<th>" + getLogin() + "</th>";
+    }
 }

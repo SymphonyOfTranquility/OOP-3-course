@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Case {
     private final Integer id;
-    private final String yearId;
-    private final String plaintiff;
-    private final String defendant;
-    private final String textOfCase;
+    private String yearId;
+    private String plaintiff;
+    private String defendant;
+    private String textOfCase;
     private Integer courtId;
     private Integer judgeId;
     private Integer isCorrect;
@@ -49,6 +49,10 @@ public class Case {
     public void setIsCorrect(Integer isCorrect) {this.isCorrect = isCorrect; }
     public void setDateOfTrial(String date) { this.dateOfTrial = date; }
     public void setJudgment(String judgment) { this.judgment = judgment; }
+    public void setYearId(String yearId) { this.yearId = yearId; }
+    public void setPlaintiff(String plaintiff) { this.plaintiff = plaintiff; }
+    public void setDefendant(String defendant) { this.defendant = defendant; }
+    public void setTextOfCase(String textOfCase) {this.textOfCase = textOfCase; }
 
     public String getRegSql() {
         String sqlParameters = "INSERT INTO cases (",

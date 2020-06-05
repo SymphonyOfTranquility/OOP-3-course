@@ -27,6 +27,10 @@ public class UpdateCaseJudge extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("get it");
         if (DBConnection.exists()) {
+            String year_id = request.getParameter("year_id");
+            String plaintiff = request.getParameter("plaintiff");
+            String defendant = request.getParameter("defendant");
+            String text_of_case = request.getParameter("text_of_case");
             String is_correct = request.getParameter("is_correct");
             String date_of_trial = request.getParameter("date_of_trial");
             String judgment = request.getParameter("judgment");
@@ -42,6 +46,14 @@ public class UpdateCaseJudge extends HttpServlet {
                 curCase.setClosed(!closed.equals("No"));
             if (!judgment.isEmpty())
                 curCase.setJudgment(judgment);
+            if (!year_id.isEmpty())
+                curCase.setYearId(year_id);
+            if (!plaintiff.isEmpty())
+                curCase.setPlaintiff(plaintiff);
+            if (!defendant.isEmpty())
+                curCase.setDefendant(defendant);
+            if (!text_of_case.isEmpty())
+                curCase.setTextOfCase(text_of_case);
             if (!date_of_trial.isEmpty())
                 curCase.setDateOfTrial(date_of_trial);
             System.out.println(judgment);

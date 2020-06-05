@@ -35,12 +35,28 @@
     <form action="judgeUpdateCase?id=<%=curCase.getId()%>" method="post">
         <table>
             <tr>
+                <th><label for="year_id"><b>year id</b></label></th>
+                <th><label for="plaintiff"><b>plaintiff</b></label></th>
+                <th><label for="defendant"><b>defendant</b></label></th>
+                <th><label for="text_of_case"><b>theme of case</b></label></th>
                 <th><label for="is_correct"><b>correctness</b></label></th>
-                <th><label for="date_of_trial">Date of trial</label></th>
-                <th><label for="judgment">Judgment</label></th>
+                <th><label for="date_of_trial">date of trial</label></th>
+                <th><label for="judgment">judgment</label></th>
                 <th><label for="closed"><b>closed</b></label></th>
             </tr>
             <tr>
+                <th>
+                    <input type="text" name="year_id">
+                </th>
+                <th>
+                    <input type="text" name="plaintiff">
+                </th>
+                <th>
+                    <input type="text" name="defendant">
+                </th>
+                <th>
+                    <input type="text" name="text_of_case">
+                </th>
                 <th>
                     <select name="is_correct">
                         <option value="None">None</option>
@@ -57,7 +73,7 @@
                 <th>
                     <select name="closed">
                         <option value="No">No</option>
-                        <option value="Yes">yes</option>
+                        <option value="Yes">Yes</option>
                     </select>
                 </th>
             </tr>
