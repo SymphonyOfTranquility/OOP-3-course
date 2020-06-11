@@ -16,7 +16,7 @@ public class OceanBoard {
             generateVisionBoard(sideLength, mouseHeight);
     }
 
-    public void generateAllBoard(int newSideLength) {
+    private void generateAllBoard(int newSideLength) {
         sideLength = newSideLength;
         board = new double[sideLength][sideLength];
         double scale = 40;
@@ -53,7 +53,7 @@ public class OceanBoard {
         }
     }
 
-    public void generateVisionBoard(int newSideLength, int mouseHeight) {
+    private void generateVisionBoard(int newSideLength, int mouseHeight) {
         sideLength = newSideLength;
         board = new double[sideLength][sideLength];
         double scale = 20;
@@ -127,14 +127,5 @@ public class OceanBoard {
                 ans += board[i][j] + " ";
             }
         return ans;
-    }
-
-    public void output() {
-        for (int i = 0;i < sideLength; ++i) {
-            for (int j = 0;j < sideLength; ++j) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
