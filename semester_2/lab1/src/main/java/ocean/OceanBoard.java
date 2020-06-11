@@ -1,27 +1,28 @@
+package lab1.ocean;
+
 import java.util.Random;
 
 public class OceanBoard {
 
     private static Random random = new Random();
-    private static int doLower = 32;
+    private static int doLower = 50;
     private double[][] board;
-    private int width, height;
+    private int sideLength;
 
-    public OceanBoard(int width, int height, boolean type, int mouseHeight) {
+    public OceanBoard(int sideLength, boolean type, int mouseHeight) {
         if (type)
-            generateAllBoard(width, height);
+            generateAllBoard(sideLength);
         else
-            generateVisionBoard(width, height, mouseHeight);
+            generateVisionBoard(sideLength, mouseHeight);
     }
 
-    public void generateAllBoard(int newWidth, int newHeight) {
-        width = newWidth;
-        height = newHeight;
-        board = new double[width][height];
+    public void generateAllBoard(int newSideLength) {
+        sideLength = newSideLength;
+        board = new double[sideLength][sideLength];
         double scale = 40;
-        for (int i = 0;i < width; ++i) {
-            for (int j = 0;j < height; ++j) {
-                if (i % 2 == 0 || j%2 == 0 || i == width-1 || j == height-1) {
+        for (int i = 0;i < sideLength; ++i) {
+            for (int j = 0;j < sideLength; ++j) {
+                if (i % 2 == 0 || j%2 == 0 || i == sideLength-1 || j == sideLength-1) {
                     board[i][j] = Math.min(random.nextDouble()*scale - doLower, CheckWorker.ZERO_HEIGHT-random.nextDouble());
                 }
                 else if (i % 5 == 0 || j % 5 == 0) {
@@ -32,50 +33,39 @@ public class OceanBoard {
                     board[i][j] = Math.min((board[i-1][j] + board[i][j-1] + board[i-1][j-1]) / 3.0,
                         CheckWorker.ZERO_HEIGHT-random.nextDouble());
                 }
-            }
-        }
-        board[(int)(width/2)][(int)(height/2)] = CheckWorker.ZERO_HEIGHT;
-        for (int i = 0;i < width; ++i) {
-            for (int j = 0;j < height; ++j) {
-                if (!(i == width-1 || j == height-1 || i == 0 || j == 0 || 
-                    i == (int)(width/2) && j == (int)(height/2))) {
-                    board[i][j] = board[i-1][j-1]+board[i][j-1]+board[i+1][j-1];
-                    board[i][j] = board[i-1][j]+board[i][j]+board[i+1][j];
-                    board[i][j] = board[i-1][j+1]+board[i][j+1]+board[i+1][j+1];
-                    board[i][j] /= 9;
-                    if (i%11 == 0 && j%11 == 0)
-                        board[i][j] -= doLower;
-                }
-            }
-        }
-        for (int i = 0;i < width; ++i) {
-            for (int j = 0;j < height; ++j) {
-                if (!(i == width-1 || j == height-1 || i == 0 || j == 0 || i%11 ==0 && j%11 ==0 ||
-                     i == (int)(width/2) && j == (int)(height/2))) {
-                    board[i][j] = board[i-1][j-1]+board[i][j-1]+board[i+1][j-1];
-                    board[i][j] = board[i-1][j]+board[i][j]+board[i+1][j];
-                    board[i][j] = board[i-1][j+1]+board[i][j+1]+board[i+1][j+1];
-                    board[i][j] /= 9;
-                }
+
+                if (i > sideLength*2/3 && j > sideLength*2/3)
+                    board[i][j] += CheckWorker.ZERO_HEIGHT*2 + doLower/2;
+                else if (i > sideLength*1/3 && j > sideLength*1/3)
+                    board[i][j] += -5 + doLower/2;
             }
         }
         
+        for (int i = 0;i < sideLength; ++i) {
+            for (int j = 0;j < sideLength; ++j) {
+                if (!(i == sideLength-1 || j == sideLength-1 || i == 0 || j == 0)) {
+                    board[i][j] = board[i-1][j-1]+board[i][j-1]+board[i+1][j-1];
+                    board[i][j] = board[i-1][j]+board[i][j]+board[i+1][j];
+                    board[i][j] = board[i-1][j+1]+board[i][j+1]+board[i+1][j+1];
+                    board[i][j] /= 9;
+                }
+            }
+        }
     }
 
-    public void generateVisionBoard(int newWidth, int newHeight, int mouseHeight) {
-        width = newWidth;
-        height = newHeight;
-        board = new double[width][height];
+    public void generateVisionBoard(int newSideLength, int mouseHeight) {
+        sideLength = newSideLength;
+        board = new double[sideLength][sideLength];
         double scale = 20;
-        for (int i = 0;i < width; ++i) {
-            for (int j = 0;j < height; ++j) {
+        for (int i = 0;i < sideLength; ++i) {
+            for (int j = 0;j < sideLength; ++j) {
                 board[i][j] = mouseHeight;
             }
         }
     }
 
     public void setAt(int i, int j, double val) {
-        if (i < width && j < height && i >= 0 && j >= 0)
+        if (i < sideLength && j < sideLength && i >= 0 && j >= 0)
             board[i][j] = val;
     }
 
@@ -110,7 +100,7 @@ public class OceanBoard {
     }
 
     public OceanBoard getVision(int mouseX, int mouseY, int mouseZ, int radius) {
-        OceanBoard visBoard = new OceanBoard(width, height, false, CheckWorker.ZERO_HEIGHT);
+        OceanBoard visBoard = new OceanBoard(sideLength, false, CheckWorker.ZERO_HEIGHT);
         int[] stepX = {1, 1, -1, -1};
         int[] stepY = {1, -1, -1, 1};
         for (int k = 0;k < 4; ++k) {
@@ -119,8 +109,8 @@ public class OceanBoard {
                     int posX = i*stepX[k] + mouseX;
                     int posY = j*stepY[k] + mouseY;
                     if ((i*i + j*j)/(radius*radius)*9 <= 1 &&
-                            posX >= 0 && posX < width &&
-                            posY >= 0 && posY < height) {
+                            posX >= 0 && posX < sideLength &&
+                            posY >= 0 && posY < sideLength) {
                         visBoard.setAt(posX, posY,
                                        getVisionHeight(posX, posY, mouseX, mouseY, mouseZ, radius, visBoard));
                     }
@@ -132,16 +122,16 @@ public class OceanBoard {
 
     public String boardToString() {
         String ans = "";
-        for (int i = 0;i < width; ++i)
-            for (int j = 0;j < height; ++j) {
+        for (int i = 0;i < sideLength; ++i)
+            for (int j = 0;j < sideLength; ++j) {
                 ans += board[i][j] + " ";
             }
         return ans;
     }
 
     public void output() {
-        for (int i = 0;i < width; ++i) {
-            for (int j = 0;j < height; ++j) {
+        for (int i = 0;i < sideLength; ++i) {
+            for (int j = 0;j < sideLength; ++j) {
                 System.out.print(board[i][j] + " ");
             }
             System.out.println();

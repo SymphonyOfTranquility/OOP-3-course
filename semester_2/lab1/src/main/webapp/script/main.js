@@ -34,7 +34,7 @@ const sceneWindow = document.getElementById("scene");
 var scene, camera, renderer, lineMaterial;
 //points - for matrix array field, linePoints - for points in visualisation
 var points, linePoints, geometry, line;
-var max_row, max_col, K;        //number of rows/columns/scalebility
+var sideLength, K;        //matrix side len /scalebility
 var rotate;                     //true - rotate field, false - not
 var mouseHeight, zeroHeight;    //zeroHeight - ocean serface
 var radius;                     //radius - distance value of getting surface
@@ -74,10 +74,9 @@ function start(data) {
 function setDefaultProperties(data) {
     K = 2;
     var tokens = data.split(" ");
-    max_row = parseFloat(tokens[1]);
-    max_col = parseFloat(tokens[2]);
-    mouseHeight = parseFloat(tokens[3]);
-    zeroHeight = parseFloat(tokens[4]);
+    sideLength = parseFloat(tokens[1]);
+    mouseHeight = parseFloat(tokens[2]);
+    zeroHeight = parseFloat(tokens[3]);
     radius = 10;
     vals.innerText = "radius = " + radius;
 }
@@ -140,25 +139,25 @@ function initScene() {
 function initStructs() {
     points = [[]]
     linePoints = [];
-    for (var i = 0;i < max_row; ++i) {
+    for (var i = 0;i < sideLength; ++i) {
         points.push([]);
         linePoints.push([]);
-        for (var j = 0;j < max_col; ++j) {
+        for (var j = 0;j < sideLength; ++j) {
             linePoints[i].push(new THREE.Vector3(0, 0, 0));
             points[i].push(0);
         }
     }
-    for (var i = 0;i < max_col; ++i) {
+    for (var i = 0;i < sideLength; ++i) {
         linePoints.push([]);
-        for (var j = 0;j < max_row; ++j) {
-            linePoints[i + max_row].push(new THREE.Vector3(0, 0, 0));
+        for (var j = 0;j < sideLength; ++j) {
+            linePoints[i + sideLength].push(new THREE.Vector3(0, 0, 0));
         }
     }
     geometry = [];
-    for (var i = 0; i < max_row+max_col; ++i)
+    for (var i = 0; i < sideLength+sideLength; ++i)
         geometry.push(new THREE.BufferGeometry().setFromPoints( linePoints[i] ));
     line = [];
-    for (var i = 0; i < max_row+max_col; ++i) {
+    for (var i = 0; i < 2*sideLength; ++i) {
         line.push(new THREE.Line(geometry[i], lineMaterial));
         scene.add(line[i]);
     }
@@ -167,7 +166,7 @@ function initStructs() {
 // create matrix of points
 function initTable() {
     var newPoints = [];
-    for (var i = 0;i < max_row*max_col; ++i)
+    for (var i = 0;i < sideLength*sideLength; ++i)
         newPoints.push(zeroHeight);
     setNewValsFromArray(newPoints, true);
 }
@@ -188,38 +187,38 @@ function changeVals(mouseX, mouseY) {
     camera.position.x = 0;
     camera.position.y = 0;
 
-    var posForX = Math.min(Math.max((mouseX - camera.position.x)/K + max_row/2, 1), max_row-2)| 0;
-    var posForY = Math.min(Math.max((-mouseY - camera.position.x)/K + max_col/2, 1),max_col-2) | 0;
+    var posForX = Math.min(Math.max((mouseX - camera.position.x)/K + sideLength/2, 1), sideLength-2)| 0;
+    var posForY = Math.min(Math.max((-mouseY - camera.position.x)/K + sideLength/2, 1),sideLength-2) | 0;
 
     socket.send("get_vals " +  String(posForX) + " " + String(posForY) + " " + radius);
 }
 
 //update vals for matrix and visibility lines
 function setNewValsFromArray(newPoints, isNew) {    //isNew - true for refresh, false for data from server
-    for (var i = 0;i < max_row; ++i) {
-        for (var j = 0;j < max_col; ++j) {
+    for (var i = 0;i < sideLength; ++i) {
+        for (var j = 0;j < sideLength; ++j) {
             if (!isNew)
-                points[j][i] = Math.min(newPoints[j*max_col + i], points[j][i])
+                points[j][i] = Math.min(newPoints[j*sideLength + i], points[j][i])
             else {
-                points[i][j] = newPoints[i*max_row + j];
+                points[i][j] = newPoints[i*sideLength + j];
             }
         }
     }
 
-    for (var i = 0;i < max_row; ++i) {
-        for (var j = 0;j < max_col; ++j) {
-            linePoints[i][j].x = (i-max_row/2)*K;
-            linePoints[i][j].y = (j-max_col/2)*K;
+    for (var i = 0;i < sideLength; ++i) {
+        for (var j = 0;j < sideLength; ++j) {
+            linePoints[i][j].x = (i-sideLength/2)*K;
+            linePoints[i][j].y = (j-sideLength/2)*K;
             linePoints[i][j].z = points[i][j];
         }
     }
-    for (var i = 0;i < max_col; ++i) {
-        for (var j = 0;j < max_row; ++j) {
-            linePoints[i + max_row][j].x = (j-max_row/2)*K;
-            linePoints[i + max_row][j].y = (i-max_col/2)*K;
-            linePoints[i + max_row][j].z = points[j][i];
+    for (var i = 0;i < sideLength; ++i) {
+        for (var j = 0;j < sideLength; ++j) {
+            linePoints[i + sideLength][j].x = (j-sideLength/2)*K;
+            linePoints[i + sideLength][j].y = (i-sideLength/2)*K;
+            linePoints[i + sideLength][j].z = points[j][i];
         }
     }
-    for (var i = 0; i < max_row+max_col; ++i)
+    for (var i = 0; i < 2*sideLength; ++i)
         geometry[i].setFromPoints( linePoints[i] );
 }

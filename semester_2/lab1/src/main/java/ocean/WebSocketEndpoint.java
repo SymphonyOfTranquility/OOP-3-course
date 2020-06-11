@@ -1,3 +1,5 @@
+package ocean;
+
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -19,7 +21,7 @@ public class WebSocketEndpoint {
                 int mouseX = Integer.parseInt(tokens[1]);
                 int mouseY = Integer.parseInt(tokens[2]);
                 int radius = Integer.parseInt(tokens[3]);
-                //System.out.println("get_vals");
+                System.out.println("get_vals");
                 for (CheckWorker worker : workers) {
                     if (worker.getSession().equals(session)) {
                         worker.createVisionBoard(mouseX, mouseY, radius);
@@ -27,12 +29,12 @@ public class WebSocketEndpoint {
                 }
             }
             else if (tokens[0].equals("refresh")) {
-                //System.out.println("refresh");
+                System.out.println("refresh");
                 for (CheckWorker worker : workers) {
                     if (worker.getSession().equals(session)) {
                         worker.newRandomBoard();
-                        //System.out.println("done!");
-                        session.getBasicRemote().sendText("refresh " + CheckWorker.WIDTH + " " + CheckWorker.HEIGHT + " " +
+                        System.out.println("done!");
+                        session.getBasicRemote().sendText("refresh " + CheckWorker.SIDE_LEN + " " +
                                 + CheckWorker.MOUSE_HEIGHT + " " + CheckWorker.ZERO_HEIGHT);
                     }
                 }
@@ -43,8 +45,7 @@ public class WebSocketEndpoint {
     @OnOpen
     public void onOpen(Session session) throws IOException {
         workers.add(new CheckWorker(session));
-        session.getBasicRemote().sendText("init " + CheckWorker.WIDTH +
-                                            " " + CheckWorker.HEIGHT +
+        session.getBasicRemote().sendText("init " + CheckWorker.SIDE_LEN +
                                             " " + CheckWorker.MOUSE_HEIGHT +
                                             " " + CheckWorker.ZERO_HEIGHT
         );
