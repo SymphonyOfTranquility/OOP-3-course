@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="three" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/../../../OOP/Sem 6/Lab 1/src/main/webapp/js/three.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../OOP/Sem 6/Lab 1/src/main/webapp/js/three.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
