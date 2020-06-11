@@ -1,4 +1,4 @@
-package lab1.ocean;
+package ocean;
 
 import java.util.Random;
 
