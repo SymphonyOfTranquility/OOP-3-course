@@ -1,6 +1,7 @@
 package DataBase;
 
 import TableElements.Tour;
+import TableElements.User;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -18,6 +19,8 @@ public class DBConnection {
             Class.forName("org.postgresql.Driver");
             currentConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tour_agency",
                     login, password);
+            if (login == "admin")
+                return null;
             currentUserName = login;
             currentConnection.setAutoCommit(true);
             Statement statement = currentConnection.createStatement();
@@ -113,5 +116,102 @@ public class DBConnection {
             throwables.printStackTrace();
         }
     }
+
+    public static void changeTourHotness(int tourId, boolean isHot) {
+        try {
+            Statement statement = currentConnection.createStatement();
+            String sql;
+            if (isHot)
+                sql = "UPDATE tours SET is_hot = 'n' WHERE tour_id = '" + tourId + "';";
+            else
+                sql = "UPDATE tours SET is_hot = 'y' WHERE tour_id = '" + tourId + "';";
+            statement.executeUpdate(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static String addUser(String userName,String email, String password,String passwordRep,String userType) {
+        try {
+            if (!password.equals(passwordRep))
+                return "error_passwd";
+            createConnection("admin", "123");
+            Statement statement = currentConnection.createStatement();
+            String sql = "SELECT * FROM users WHERE users.username = '" + userName +
+                    "' OR users.email = '" + email + "' ;";
+            ResultSet curSet = statement.executeQuery(sql);
+            if (curSet.next())
+            {
+                close();
+                if (curSet.getString("username").equals(userName))
+                    return "error_user";
+                else
+                    return "error_email";
+            }
+            User user = new User(0, userName, password, email, false, 0);
+            if (userType.equals("client"))
+                user.setApproved(true);
+
+            sql = "INSERT INTO users (username, password, email, approved, discount) " +
+                    "VALUES (" + user.toString() + ")";
+            statement.executeUpdate(sql);
+            if (user.isApproved())
+            {
+                sql = "CREATE USER " + user.getUsername() + " WITH IN ROLE client PASSWORD '" + password + "';";
+                statement.executeUpdate(sql);
+            }
+            close();
+            return "done!";
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return "error_user";
+    }
+
+    public static List<User> getAllUnapproved()
+    {
+        try {
+            Statement statement = currentConnection.createStatement();
+            String sql = "SELECT * FROM users WHERE users.approved = 'n'";
+            ResultSet curSet = statement.executeQuery(sql);
+            List<User> users = new LinkedList<>();
+            while (curSet.next()) {
+                User newUser = new User(curSet.getInt("user_id"), curSet.getString("username"),
+                        curSet.getString("password"),  curSet.getString("email"),
+                        curSet.getBoolean("approved"), 0);
+                users.add(newUser);
+            }
+            return users;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void approveUser(int id)
+    {
+        try {
+            Statement statement = currentConnection.createStatement();
+            String sql = "UPDATE users SET approved = 'y' WHERE user_id = '" + id + "';";
+            statement.executeUpdate(sql);
+            statement = currentConnection.createStatement();
+            sql = "SELECT * FROM users WHERE users.user_id = " + id + ";";
+            System.out.println(sql);
+            ResultSet curSet = statement.executeQuery(sql);
+            curSet.next();
+
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tour_agency",
+                    "admin", "123");
+            statement = connection.createStatement();
+            sql = "CREATE USER " + curSet.getString("username") +
+                    " WITH IN ROLE tour_agent PASSWORD '" + curSet.getString("password") + "';";
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
 }

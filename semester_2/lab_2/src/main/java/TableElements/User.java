@@ -8,7 +8,7 @@ public class User {
     private boolean approved;
     private int discount;
 
-    User(int id, String username, String password, String email, boolean approved, int discount)
+    public User(int id, String username, String password, String email, boolean approved, int discount)
     {
         this.id = id;
         this.username = username;
@@ -64,5 +64,24 @@ public class User {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public String toString()
+    {
+        String res = "'" + username + "', '" + password + "', '" + email + "', ";
+        if (isApproved())
+            res += "'y', ";
+        else
+            res += "'n', ";
+        res += "0";
+        System.out.println(res);
+        return res;
+    }
+
+    public String toTable() {
+        String res =  "<th>" + getId() + "</th>" +
+                "<th>" + getUsername() + "</th>" +
+                "<th>" + getEmail() + "</th>";
+        return res;
     }
 }

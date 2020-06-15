@@ -12,13 +12,9 @@ public class TourAgentPage extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (DBConnection.exists("tour_agent")) {
-            getServletContext().getRequestDispatcher("/tour_agent/mainPage.jsp").
-                    forward(request, response);
-        }
-        else
-        {
-            DBConnection.close();
-            response.sendRedirect("/checkPassword");
+            getServletContext().getRequestDispatcher("/tour_agent/mainPage.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/lab_2_war_exploded/logOut");
         }
     }
 }

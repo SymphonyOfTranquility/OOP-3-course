@@ -12,15 +12,21 @@
 <form action="checkPassword" method="post">
     <h2>Login</h2>
     <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
+        <div>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+        </div>
+        <div>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        </div>
         <button type="submit">Login</button>
     </div>
-    <div>Create new account</div>
+
+    <div style="padding-left: 5px; padding-top: 5px">
+        <br/>
+        <a href="http://localhost:8080/lab_2_war_exploded/createAccount">Create new account</a>
+    </div>
 </form>
 </body>
 </html>

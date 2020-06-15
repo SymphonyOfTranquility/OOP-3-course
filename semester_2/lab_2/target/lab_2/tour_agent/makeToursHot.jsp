@@ -2,13 +2,13 @@
   Created by IntelliJ IDEA.
   User: art
   Date: 6/14/20
-  Time: 4:59 PM
+  Time: 8:05 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     if (request.getAttribute("Tours") == null) {
-        response.sendRedirect("/lab_2_war_exploded/chooseTour");
+        response.sendRedirect("/lab_2_war_exploded/makeToursHot");
         return;
     }
     Tour[] tours = (Tour[]) request.getAttribute("Tours");
@@ -17,11 +17,12 @@
 %>
 <html>
 <head>
-    <title>Choose tour</title>
+    <title>Hot Tours</title>
 </head>
 <body>
+
 <div>
-    <h1>Available tours</h1>
+    <h1>All tours</h1>
     <br />
 </div>
 <table border="3px solid black" cellpadding="5" cellspacing="0">
@@ -35,8 +36,8 @@
     <tr align="center">
         <%=tours[i].toTable()%>
         <th align="center">
-            <form action="/lab_2_war_exploded/chooseTour?id=<%=tours[i].getId()%>" method="post">
-                <input type="submit" value="Buy">
+            <form action="/lab_2_war_exploded/makeToursHot?id=<%=tours[i].getId()%>&is_hot=<%=tours[i].isHot()%>" method="post">
+                <input type="submit" value="Change hotness">
             </form>
         </th>
     </tr>
@@ -46,7 +47,7 @@
 
 <div style="padding-left: 5px; padding-top: 5px">
     <br/>
-    <a href="http://localhost:8080/lab_2_war_exploded/clientPage">Return to main</a>
+    <a href="http://localhost:8080/lab_2_war_exploded/tourAgentPage">Return to main</a>
 </div>
 </body>
 </html>

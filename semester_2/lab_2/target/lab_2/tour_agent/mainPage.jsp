@@ -11,6 +11,21 @@
     <title>Tour agent page</title>
 </head>
 <body>
-<div>  AGENT </div>
+
+<div style="padding-left: 5px; padding-top: 5px">
+    <br/>
+    <a href="http://localhost:8080/lab_2_war_exploded/makeToursHot">Make tours hot</a>
+</div>
+
+<div style="padding-left: 5px; padding-top: 5px">
+    <br/>
+    <a href="http://localhost:8080/lab_2_war_exploded/approveAdmin">Approve new admins</a>
+</div>
+
+<div style="padding-left: 5px; padding-top: 5px">
+    <br/>
+    <a href="http://localhost:8080/lab_2_war_exploded/logOut">logOut</a>
+</div>
+
 </body>
 </html>

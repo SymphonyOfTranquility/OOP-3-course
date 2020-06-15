@@ -29,7 +29,7 @@
         <th>id</th>
         <th>name</th>
         <th>type</th>
-        <th>closed</th>
+        <th>hot!</th>
     </tr>
     <% for (int i = 0;i < tours.length; ++i) { %>
     <tr align="center">
