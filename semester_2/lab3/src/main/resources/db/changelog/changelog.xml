@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="postgres">
+        <createTable tableName="clients">
+            <column name="id" autoIncrement="true" type="INTEGER">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)" defaultValue="Artemiy">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(50)"/>
+            <column name="discount" type="INTEGER"/>
+        </createTable>
+
+        <createTable tableName="tours">
+            <column name="id" autoIncrement="true" type="INTEGER">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="is_hot" type="BOOLEAN" defaultValue="false" />
+        </createTable>
+
+        <createTable tableName="bookings">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="INTEGER">
+                <constraints foreignKeyName="fk_client_id" referencedTableName="clients" referencedColumnNames="id"/>
+            </column>
+            <column name="tour_id" type="INTEGER">
+                <constraints foreignKeyName="fk_tour_id" referencedTableName="tours" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="clients" cascadeConstraints="true"/>
+            <dropTable tableName="tours" cascadeConstraints="true"/>
+            <dropTable tableName="bookings" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
