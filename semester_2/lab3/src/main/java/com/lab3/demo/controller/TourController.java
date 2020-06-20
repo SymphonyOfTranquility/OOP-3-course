@@ -14,12 +14,6 @@ import java.util.List;
 public class TourController {
     private final TourControllerService tourControllerService;
 
-    @GetMapping(value = "/addTour")
-    public TourDTO addTour(@RequestBody TourDTO tourDTO) { return tourControllerService.addTour(tourDTO); }
-
-    @PostMapping(value = "/tours")
-    public List<TourDTO> findAllUserTours(@RequestParam Long clientId) { return tourControllerService.findAllClientsTours(clientId); }
-
     @GetMapping(value = "/tours")
     public List<TourDTO> findAll() { return tourControllerService.findAll(); }
 
@@ -27,5 +21,7 @@ public class TourController {
     public TourDTO changeHotness(@PathVariable(value = "tourId") Long tourId) {
         return tourControllerService.setHotness(tourId);
     }
+    @PostMapping(value = "/addTour")
+    public TourDTO addTour(@RequestBody TourDTO tourDTO) { return tourControllerService.addTour(tourDTO); }
 
 }

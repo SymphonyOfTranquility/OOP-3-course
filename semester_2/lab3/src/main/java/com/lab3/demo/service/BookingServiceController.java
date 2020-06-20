@@ -13,17 +13,11 @@ import com.lab3.demo.service.data.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class BookingServiceController {
     private final BookingService bookingService;
     private final ClientConverter clientConverter;
-    private final BookingConverter bookingConverter;
-    private final TourConverter tourConverter;
 
     public ClientDTO addBooking(BookingDTO bookingDTO){
         Client client = bookingService.addBooking(bookingDTO);
